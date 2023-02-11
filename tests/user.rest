@@ -1,0 +1,53 @@
+GET http://127.0.0.1:3333/api/users
+
+###
+
+GET http://127.0.0.1:3333/api/users/1
+
+###
+
+POST http://127.0.0.1:3333/api/users
+Content-Type: application/json
+
+{
+    "username": "amuhajirs",
+    "email":"amuhajirs@gmail.com",
+    "password": "password",
+    "password_confirmation": "password"
+}
+
+###
+
+PATCH http://127.0.0.1:3333/api/users/3
+Content-Type: application/json
+
+{
+    "username": "jeremyjfn"
+}
+
+###
+DELETE http://127.0.0.1:3333/api/users/1
+
+###
+
+# Login
+POST http://127.0.0.1:3333/api/login
+Content-Type: application/json
+
+{
+    "username": "amuhajirs",
+    "password": "password"
+}
+
+
+###
+
+# GetMe
+GET http://127.0.0.1:3333/api/me
+Authorization: bearer Mg.t7hpqbmFD_HQNlyEWETR_2inY1Pwu43uyXjxLLQzzfJaIbK4fQuWYHQioghr
+
+### 
+
+# Logout
+GET http://127.0.0.1:3333/api/logout
+Authorization: bearer Mg.t7hpqbmFD_HQNlyEWETR_2inY1Pwu43uyXjxLLQzzfJaIbK4fQuWYHQioghr
