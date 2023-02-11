@@ -18,11 +18,12 @@ Content-Type: application/json
 
 ###
 
-PATCH http://127.0.0.1:3333/api/users/3
+PATCH http://127.0.0.1:3333/api/users/1
 Content-Type: application/json
 
 {
-    "username": "jeremyjfn"
+    "username": "jeremyjfn",
+    "email": "jeremyjeferson71@gmail.com"
 }
 
 ###

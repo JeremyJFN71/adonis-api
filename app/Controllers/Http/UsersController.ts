@@ -1,7 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import Hash from '@ioc:Adonis/Core/Hash'
-import UserValidator from 'App/Validators/UserValidator'
+import CreateUserValidator from 'App/Validators/CreateUserValidator'
+import EditUserValidator from 'App/Validators/EditUserValidator'
 
 
 export default class UsersController {
@@ -24,7 +25,7 @@ export default class UsersController {
     // Create User
     async createUser({request, response}:HttpContextContract) {
         // Validation
-        const payload = await request.validate(UserValidator)
+        const payload = await request.validate(CreateUserValidator)
         payload.password = await Hash.make(payload.password)
 
         const user = await User.create(payload)
@@ -38,7 +39,11 @@ export default class UsersController {
             return response.status(400).json({message: 'User not found'})
         }
 
-        user?.merge(request.body()).save()
+        // Validation
+        const payload = await request.validate(EditUserValidator)
+
+
+        user?.merge(payload).save()
         return response.json({message: 'User has been updated'})
     }
 
