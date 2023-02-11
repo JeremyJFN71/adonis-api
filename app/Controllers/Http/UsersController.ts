@@ -73,6 +73,7 @@ export default class UsersController {
         return response.json(auth.user)
     }
 
+    // Logout
     async logout({auth, response}:HttpContextContract){
         await auth.use('api').revoke()
         return response.json({message: 'You have been logged out'})
