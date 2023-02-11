@@ -23,7 +23,9 @@ Content-Type: application/json
 
 {
     "username": "jeremyjfn",
-    "email": "jeremyjeferson71@gmail.com"
+    "email": "jeremyjeferson71@gmail.com",
+    "password": "password",
+    "password_confirmation": "password"
 }
 
 ###

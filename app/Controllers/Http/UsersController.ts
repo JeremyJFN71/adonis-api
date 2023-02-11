@@ -42,6 +42,9 @@ export default class UsersController {
         // Validation
         const payload = await request.validate(EditUserValidator)
 
+        if(payload.password){
+            payload.password = await Hash.make(payload.password)
+        }
 
         user?.merge(payload).save()
         return response.json({message: 'User has been updated'})
