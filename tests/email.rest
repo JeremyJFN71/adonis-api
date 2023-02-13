@@ -1,0 +1,8 @@
+POST http://127.0.0.1:3333/api/email
+Content-Type: application/json
+
+{
+    "email": "grandneomuhajir@gmail.com",
+    "name": "Jeremy Jeferson",
+    "message": "halo kakak"
+}

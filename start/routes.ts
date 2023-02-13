@@ -20,21 +20,25 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-
-// CRUD User
-Route.get('/api/users', 'UsersController.allUsers')
-Route.get('/api/users/:id', 'UsersController.oneUser')
-Route.post('/api/users', 'UsersController.createUser')
-Route.patch('/api/users/:id', 'UsersController.updateUser')
-Route.delete('/api/users/:id', 'UsersController.deleteUser')
-
-// Login
-Route.post('/api/login', 'UsersController.login')
-
-// Logout
-Route.get('/api/logout', 'UsersController.logout')
-
-// Get Current User Detail
+// API
 Route.group(() => {
-  Route.get('/api/me', 'UsersController.getMe')
-}).middleware('auth:api')
+  // CRUD User
+  Route.get('/users', 'UsersController.allUsers')
+  Route.get('/users/:id', 'UsersController.oneUser')
+  Route.post('/users', 'UsersController.createUser')
+  Route.patch('/users/:id', 'UsersController.updateUser')
+  Route.delete('/users/:id', 'UsersController.deleteUser')
+
+  // Login
+  Route.post('/login', 'UsersController.login')
+
+  // Logout
+  Route.get('/logout', 'UsersController.logout')
+
+  // Get Current User Detail
+  Route.group(() => {
+    Route.get('/me', 'UsersController.getMe')
+  }).middleware('auth:api')
+
+  Route.post('/email', 'EmailsController.store')
+}).prefix('/api')
