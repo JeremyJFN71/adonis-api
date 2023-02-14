@@ -1,21 +1,23 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Mail from "@ioc:Adonis/Addons/Mail"
-import Env from '@ioc:Adonis/Core/Env'
+
+import EmailValidator from 'App/Validators/EmailValidator'
+import ContactMailer from 'App/Mailers/ContactMailer'
 
 export default class EmailsController {
 
     async store({request, response}: HttpContextContract){
-        await Mail.send((message) => {
-            message
-                .from(request.input('email'))
-                .to(Env.get('DESTINATION_EMAIL'))
-                .subject(request.input('name'))
-                .text(request.input('message'))
-            })
+        let data: any
+        try{
+            data = await request.validate(EmailValidator)
+        } catch(err){
+            return response.status(400).json({message: err.message})
+        }
+
+        await new ContactMailer(data).send()
 
         return response.json({
             message: 'Email terkirim',
-            subject: request.input('name')
+            from: request.input('email')
         })
     }
 }
