@@ -2,7 +2,7 @@ import { BaseMailer, MessageContract } from '@ioc:Adonis/Addons/Mail'
 import Env from '@ioc:Adonis/Core/Env'
 
 export default class ContactMailer extends BaseMailer {
-  constructor(private message: {email: string, name: string, message: string}){
+  constructor(private message: {name: string, email: string, subject:string, message: string}){
     super()
   }
   /**
@@ -25,11 +25,12 @@ export default class ContactMailer extends BaseMailer {
     message
       .from(Env.get('SMTP_USERNAME'))
       .to(Env.get('DESTINATION_EMAIL'))
-      .subject(`Portfolio | ${this.message.name}`)
+      .subject(`Portfolio | ${this.message.subject}`)
       .text(
         `${this.message.message}
 
-from ${this.message.email}`
+from ${this.message.name},
+${this.message.email}`
       )
   }
 }
